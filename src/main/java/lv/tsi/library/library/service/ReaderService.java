@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ReaderService {
@@ -32,5 +33,13 @@ public class ReaderService {
                 .map(it -> readerMapper.toDto(it, true))
                 .collect(Collectors.toList());
     }
+
+    public List<ReaderDto> getReadersList(){
+        var readersList = readerRepository.findAll();
+        return StreamSupport.stream(readersList.spliterator(), false)
+                .map(it -> readerMapper.toDto(it, true))
+                .collect(Collectors.toList());
+    }
+
 }
 

@@ -2,11 +2,7 @@ package lv.tsi.library.library.controller;
 
 import lv.tsi.library.library.dto.ReaderDto;
 import lv.tsi.library.library.service.ReaderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,13 +17,18 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
-    public ReaderDto getReadetById(@PathVariable Long id) {
+    public ReaderDto getReaderById(@PathVariable Long id) {
         return readerService.findById(id);
     }
 
     @GetMapping("/search")
     public List<ReaderDto> findByName(@RequestParam String name) {
         return readerService.findAllByName(name);
+    }
+
+    @GetMapping("/list")
+    public List<ReaderDto> findAll() {
+        return readerService.getReadersList();
     }
 
 }
