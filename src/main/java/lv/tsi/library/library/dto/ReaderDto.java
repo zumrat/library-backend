@@ -6,66 +6,48 @@ import java.util.StringJoiner;
 
 public class ReaderDto {
 
-    private Long id;
-    private String email;
-    private String address;
-    private String fullName;
-    private String phoneNumber;
+    private final Long id;
+    private final String email;
+    private final String address;
+    private final String fullName;
+    private final String phoneNumber;
+    private final List<CheckOutDto> checkOuts;
 
-    private List<CheckOutDto> checkOuts;
+    private ReaderDto(Long id, String email, String address, String fullName, String phoneNumber, List<CheckOutDto> checkOuts) {
+        this.id = id;
+        this.email = email;
+        this.address = address;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.checkOuts = checkOuts;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public ReaderDto setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public ReaderDto setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public ReaderDto setAddress(String address) {
-        this.address = address;
-        return this;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public ReaderDto setFullName(String fullName) {
-        this.fullName = fullName;
-        return this;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public ReaderDto setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
     public List<CheckOutDto> getCheckOuts() {
         return checkOuts;
-    }
-
-    public ReaderDto setCheckOuts(List<CheckOutDto> checkOuts) {
-        this.checkOuts = checkOuts;
-        return this;
     }
 
     @Override
@@ -91,5 +73,52 @@ public class ReaderDto {
                 .add("phoneNumber='" + phoneNumber + "'")
                 .add("checkOuts=" + checkOuts)
                 .toString();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String email;
+        private String address;
+        private String fullName;
+        private String phoneNumber;
+        private List<CheckOutDto> checkOuts;
+
+        Builder() {
+        }
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder fullName(String fullName) {
+            this.fullName = fullName;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder checkOuts(List<CheckOutDto> checkOuts) {
+            this.checkOuts = checkOuts;
+            return this;
+        }
+
+        public ReaderDto build() {
+            return new ReaderDto(id, email, address, fullName, phoneNumber, checkOuts);
+        }
+
     }
 }

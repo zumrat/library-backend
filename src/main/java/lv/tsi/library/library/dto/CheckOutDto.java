@@ -7,70 +7,65 @@ import java.util.StringJoiner;
 
 public class CheckOutDto {
 
-    private Long id;
-    private LocalDate reserveDate;
+    private final Long id;
+    private final LocalDate reserveDate;
     @NotNull
-    private LocalDate dueDate;
-    private LocalDate returnDate;
+    private final LocalDate dueDate;
+    private final LocalDate returnDate;
     @NotNull
     private ReaderDto reader;
     @NotNull
-    private BookDto book;
+    private final BookDto book;
+
+    private CheckOutDto(Long id, LocalDate reserveDate, @NotNull LocalDate dueDate, LocalDate returnDate, @NotNull ReaderDto reader, @NotNull BookDto book) {
+        this.id = id;
+        this.reserveDate = reserveDate;
+        this.dueDate = dueDate;
+        this.returnDate = returnDate;
+        this.reader = reader;
+        this.book = book;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
 
     public Long getId() {
         return id;
     }
 
-    public CheckOutDto setId(Long id) {
-        this.id = id;
-        return this;
-    }
+
 
     public LocalDate getReserveDate() {
         return reserveDate;
     }
 
-    public CheckOutDto setReserveDate(LocalDate reserveDate) {
-        this.reserveDate = reserveDate;
-        return this;
-    }
+
 
     public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public CheckOutDto setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-        return this;
-    }
+
 
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public CheckOutDto setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
-        return this;
-    }
+
 
     public ReaderDto getReader() {
         return reader;
     }
 
-    public CheckOutDto setReader(ReaderDto reader) {
-        this.reader = reader;
-        return this;
-    }
+
 
     public BookDto getBook() {
         return book;
     }
 
-    public CheckOutDto setBook(BookDto book) {
-        this.book = book;
-        return this;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -95,5 +90,58 @@ public class CheckOutDto {
                 .add("returnDate=" + returnDate)
                 .add("reader=" + reader)
                 .toString();
+    }
+
+    public CheckOutDto setReader(ReaderDto readerDto) {
+        this.reader = readerDto;
+        return this;
+    }
+
+    public static class Builder {
+        private Long id;
+        private LocalDate reserveDate;
+        private LocalDate dueDate;
+        private LocalDate returnDate;
+        private ReaderDto reader;
+        private BookDto book;
+
+        Builder() {
+        }
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder reserveDate(LocalDate reserveDate) {
+            this.reserveDate = reserveDate;
+            return this;
+        }
+
+        public Builder dueDate(@NotNull LocalDate dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
+
+        public Builder returnDate(LocalDate returnDate) {
+            this.returnDate = returnDate;
+            return this;
+        }
+
+        public Builder reader(@NotNull ReaderDto reader) {
+            this.reader = reader;
+            return this;
+        }
+
+        public Builder book(@NotNull BookDto book) {
+            this.book = book;
+            return this;
+        }
+
+        public CheckOutDto build() {
+            return new CheckOutDto(id, reserveDate, dueDate, returnDate, reader, book);
+        }
+
+
     }
 }

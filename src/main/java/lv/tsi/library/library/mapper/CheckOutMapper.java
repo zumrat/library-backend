@@ -24,11 +24,12 @@ public class CheckOutMapper {
     }
 
     public CheckOutDto toDto(CheckOut entity) {
-        return new CheckOutDto()
-                .setId(entity.getId())
-                .setBook(bookMapper.toDto(entity.getBook()))
-                .setDueDate(entity.getDueDate())
-                .setReturnDate(entity.getReturnDate())
-                .setReserveDate(entity.getReserveDate());
+        return CheckOutDto.builder()
+                .id(entity.getId())
+                .book(bookMapper.toDto(entity.getBook()))
+                .dueDate(entity.getDueDate())
+                .returnDate(entity.getReturnDate())
+                .reserveDate(entity.getReserveDate())
+                .build();
     }
 }

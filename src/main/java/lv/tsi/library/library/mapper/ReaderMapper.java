@@ -24,17 +24,17 @@ public class ReaderMapper {
     }
 
     public ReaderDto toDto(Reader entity, boolean mapCheckOuts) {
-        var dto = new ReaderDto()
-                .setAddress(entity.getAddress())
-                .setEmail(entity.getEmail())
-                .setId(entity.getId())
-                .setFullName(entity.getFullName())
-                .setPhoneNumber(entity.getPhoneNumber());
+        var builder = ReaderDto.builder()
+                .address(entity.getAddress())
+                .email(entity.getEmail())
+                .id(entity.getId())
+                .fullName(entity.getFullName())
+                .phoneNumber(entity.getPhoneNumber());
         if (mapCheckOuts) {
-            dto.setCheckOuts(entity.getCheckouts().stream()
+            builder.checkOuts(entity.getCheckouts().stream()
                     .map(checkOutMapper::toDto)
                     .collect(Collectors.toList()));
         }
-        return dto;
+        return builder.build();
     }
 }

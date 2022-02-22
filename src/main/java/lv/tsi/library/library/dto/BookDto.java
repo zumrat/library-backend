@@ -8,79 +8,74 @@ import java.util.StringJoiner;
 
 public class BookDto {
 
-    private Long id;
-    private String isbn;
-    private String title;
-    private String edition;
-    private List<String> genres;
-    private String pictureUrl;
-    private String description;
-    private BookStatus bookStatus;
+    private final Long id;
+    private final String isbn;
+    private final String title;
+    private final String edition;
+    private final List<String> genres;
+    private final String pictureUrl;
+    private final String description;
+    private final BookStatus bookStatus;
 
     private AuthorDto authorDto;
+
+    private BookDto(Long id, String isbn, String title, String edition, List<String> genres, String pictureUrl, String description, BookStatus bookStatus, AuthorDto authorDto) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.edition = edition;
+        this.genres = genres;
+        this.pictureUrl = pictureUrl;
+        this.description = description;
+        this.bookStatus = bookStatus;
+        this.authorDto = authorDto;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public Long getId() {
         return id;
     }
 
-    public BookDto setId(Long id) {
-        this.id = id;
-        return this;
-    }
+
 
     public String getIsbn() {
         return isbn;
     }
 
-    public BookDto setIsbn(String isbn) {
-        this.isbn = isbn;
-        return this;
-    }
+
 
     public String getTitle() {
         return title;
     }
 
-    public BookDto setTitle(String title) {
-        this.title = title;
-        return this;
-    }
+
 
     public String getEdition() {
         return edition;
     }
 
-    public BookDto setEdition(String edition) {
-        this.edition = edition;
-        return this;
-    }
+
 
     public List<String> getGenres() {
         return genres;
     }
 
-    public BookDto setGenres(List<String> genres) {
-        this.genres = genres;
-        return this;
-    }
+
 
     public String getPictureUrl() {
         return pictureUrl;
     }
 
-    public BookDto setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-        return this;
-    }
+
 
     public String getDescription() {
         return description;
     }
 
-    public BookDto setDescription(String description) {
-        this.description = description;
-        return this;
-    }
+
 
     public AuthorDto getAuthorDto() {
         return authorDto;
@@ -95,10 +90,6 @@ public class BookDto {
         return bookStatus;
     }
 
-    public BookDto setBookStatus(BookStatus bookStatus) {
-        this.bookStatus = bookStatus;
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -126,5 +117,70 @@ public class BookDto {
                 .add("bookStatus=" + bookStatus)
                 .add("authorDto=" + authorDto)
                 .toString();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String isbn;
+        private String title;
+        private String edition;
+        private List<String> genres;
+        private String pictureUrl;
+        private String description;
+        private BookStatus bookStatus;
+        private AuthorDto authorDto;
+
+        private Builder() {
+        }
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder isbn(String isbn) {
+            this.isbn = isbn;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder edition(String edition) {
+            this.edition = edition;
+            return this;
+        }
+
+        public Builder genres(List<String> genres) {
+            this.genres = genres;
+            return this;
+        }
+
+        public Builder pictureUrl(String pictureUrl) {
+            this.pictureUrl = pictureUrl;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder bookStatus(BookStatus bookStatus) {
+            this.bookStatus = bookStatus;
+            return this;
+        }
+
+        public Builder authorDto(AuthorDto authorDto) {
+            this.authorDto = authorDto;
+            return this;
+        }
+
+        public BookDto build() {
+            return new BookDto(id, isbn, title, edition, genres, pictureUrl, description, bookStatus, authorDto);
+        }
+
     }
 }

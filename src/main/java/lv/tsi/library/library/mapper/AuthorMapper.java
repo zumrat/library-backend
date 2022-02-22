@@ -14,8 +14,9 @@ public class AuthorMapper {
     }
 
     public AuthorDto toDto(Author author) {
-        return new AuthorDto()
-                .setFullName(author.getFullName())
-                .setId(author.getId());
+        return AuthorDto.builder()
+                .fullName(author.getFullName())
+                .id(author.getId())
+                .build();
     }
 }

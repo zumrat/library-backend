@@ -29,19 +29,20 @@ public class BookMapper {
     }
 
     public BookDto toDto(Book entity) {
-        return new BookDto()
-                .setBookStatus(entity.getBookStatus())
-                .setGenres(entity.getBookGenres().stream()
+        return BookDto.builder()
+                .bookStatus(entity.getBookStatus())
+                .genres(entity.getBookGenres().stream()
                         .map(BookGenre::getGenre)
                         .map(Genre::getValue)
                         .collect(Collectors.toList()))
-                .setAuthorDto(authorMapper.toDto(entity.getAuthor()))
-                .setId(entity.getId())
-                .setDescription(entity.getDescription())
-                .setIsbn(entity.getIsbn())
-                .setTitle(entity.getTitle())
-                .setPictureUrl(entity.getPictureUrl())
-                .setEdition(entity.getEdition());
+                .authorDto(authorMapper.toDto(entity.getAuthor()))
+                .id(entity.getId())
+                .description(entity.getDescription())
+                .isbn(entity.getIsbn())
+                .title(entity.getTitle())
+                .pictureUrl(entity.getPictureUrl())
+                .edition(entity.getEdition())
+                .build();
     }
 
 }
