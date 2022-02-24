@@ -10,6 +10,7 @@ import lv.tsi.library.library.mapper.AuthorMapper;
 import lv.tsi.library.library.mapper.BookMapper;
 import lv.tsi.library.library.repository.AuthorRepository;
 import lv.tsi.library.library.repository.BookRepository;
+import lv.tsi.library.library.repository.BookRepositoryAdapter;
 import lv.tsi.library.library.repository.GenreRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,7 +45,7 @@ class BookServiceTest {
     private GenreRepository genreRepository;
 
     @Mock
-    private BookRepository bookRepository;
+    private BookRepositoryAdapter bookRepository;
 
     @InjectMocks
     private BookService bookService;
@@ -95,7 +96,7 @@ class BookServiceTest {
         var book = new Book()
                 .setAuthor(new Author()
                         .setFullName(query));
-        when(bookRepository.findAllDistinctByAuthorFullNameContainingIgnoreCaseOrTitleContainingIgnoreCaseOrBookGenresGenreValueContainingIgnoreCase(query, query, query))
+        when(bookRepository.searchBooks(query))
                 .thenReturn(List.of(book));
         when(bookMapper.toDto(book)).thenReturn(BookDto.builder().build());
         when(authorMapper.toDto(book.getAuthor())).thenReturn(AuthorDto.builder().build());
