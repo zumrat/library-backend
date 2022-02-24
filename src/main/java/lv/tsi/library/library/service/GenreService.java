@@ -5,6 +5,7 @@ import lv.tsi.library.library.entity.Genre;
 import lv.tsi.library.library.exception.LibraryEntityNotFoundException;
 import lv.tsi.library.library.repository.BookGenreRepository;
 import lv.tsi.library.library.repository.BookRepository;
+import lv.tsi.library.library.repository.BookRepositoryAdapter;
 import lv.tsi.library.library.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,9 @@ public class GenreService {
 
     private final GenreRepository genreRepository;
     private final BookGenreRepository bookGenreRepository;
-    private final BookRepository bookRepository;
+    private final BookRepositoryAdapter bookRepository;
 
-    public GenreService(GenreRepository genreRepository, BookGenreRepository bookGenreRepository, BookRepository bookRepository) {
+    public GenreService(GenreRepository genreRepository, BookGenreRepository bookGenreRepository, BookRepositoryAdapter bookRepository) {
         this.genreRepository = genreRepository;
         this.bookGenreRepository = bookGenreRepository;
         this.bookRepository = bookRepository;

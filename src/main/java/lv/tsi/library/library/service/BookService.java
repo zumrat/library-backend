@@ -11,6 +11,7 @@ import lv.tsi.library.library.mapper.AuthorMapper;
 import lv.tsi.library.library.mapper.BookMapper;
 import lv.tsi.library.library.repository.AuthorRepository;
 import lv.tsi.library.library.repository.BookRepository;
+import lv.tsi.library.library.repository.BookRepositoryAdapter;
 import lv.tsi.library.library.repository.GenreRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    private final BookRepository bookRepository;
+    private final BookRepositoryAdapter bookRepository;
     private final AuthorRepository authorRepository;
     private final BookMapper bookMapper;
     private final AuthorMapper authorMapper;
     private final GenreRepository genreRepository;
 
-    public BookService(BookRepository bookRepository, AuthorRepository authorRepository, BookMapper bookMapper, AuthorMapper authorMapper, GenreRepository genreRepository) {
+    public BookService(BookRepositoryAdapter bookRepository, AuthorRepository authorRepository, BookMapper bookMapper, AuthorMapper authorMapper, GenreRepository genreRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.bookMapper = bookMapper;
@@ -37,7 +38,7 @@ public class BookService {
 
     public List<BookDto> getBooks(String query) {
         var books = Optional.ofNullable(query)
-                .map(it -> bookRepository.findAllDistinctByAuthorFullNameContainingIgnoreCaseOrTitleContainingIgnoreCaseOrBookGenresGenreValueContainingIgnoreCase(it, it, it))
+                .map(bookRepository::searchBooks)
                 .orElseGet(bookRepository::findAll);
         return books.stream()
                 .map(this::toBookDto)

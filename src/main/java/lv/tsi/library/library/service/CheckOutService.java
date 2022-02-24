@@ -7,6 +7,7 @@ import lv.tsi.library.library.exception.LibraryEntityNotFoundException;
 import lv.tsi.library.library.mapper.CheckOutMapper;
 import lv.tsi.library.library.mapper.ReaderMapper;
 import lv.tsi.library.library.repository.BookRepository;
+import lv.tsi.library.library.repository.BookRepositoryAdapter;
 import lv.tsi.library.library.repository.CheckOutRepository;
 import lv.tsi.library.library.repository.ReaderRepository;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,13 @@ import java.time.LocalDate;
 @Service
 public class CheckOutService {
 
-    private final BookRepository bookRepository;
+    private final BookRepositoryAdapter bookRepository;
     private final CheckOutRepository checkOutRepository;
     private final ReaderRepository readerRepository;
     private final CheckOutMapper checkOutMapper;
     private final ReaderMapper readerMapper;
 
-    public CheckOutService(BookRepository bookRepository, CheckOutRepository checkOutRepository, ReaderRepository readerRepository, CheckOutMapper checkOutMapper, ReaderMapper readerMapper) {
+    public CheckOutService(BookRepositoryAdapter bookRepository, CheckOutRepository checkOutRepository, ReaderRepository readerRepository, CheckOutMapper checkOutMapper, ReaderMapper readerMapper) {
         this.bookRepository = bookRepository;
         this.checkOutRepository = checkOutRepository;
         this.readerRepository = readerRepository;
